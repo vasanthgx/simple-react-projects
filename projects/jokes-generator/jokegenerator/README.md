@@ -5,3 +5,7 @@
 1) Joke-1
 
 ![joke-1](https://github.com/vasanthgx/simple-react-projects/blob/main/projects/jokes-generator/jokegenerator/images/image1.png)
+
+2) ![joke-2](https://github.com/vasanthgx/simple-react-projects/blob/main/projects/jokes-generator/jokegenerator/images/image2.png)
+
+3) ![joke-1](https://github.com/vasanthgx/simple-react-projects/blob/main/projects/jokes-generator/jokegenerator/images/image3.png)
