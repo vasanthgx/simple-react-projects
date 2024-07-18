@@ -11,17 +11,13 @@ This repository will serve as a collection of different React projects, ranging 
 Project 1: [Jokes Generator](projects/jokes-generator/jokegenerator)
 
 Description: we will create a website that retrieves jokes from an external API and displays them on the screen.
-Status: Completed
 
-Project 2: Weather App
 
-Description: A weather forecasting app that fetches data from an external API and displays it to the user. This project highlights API integration and dynamic rendering in React.
-Status: In Progress
-Project 3: E-commerce Store
+Project 2: [Rolling dice](projects/rolling-dice)
 
-Description: A mock e-commerce store that includes product listings, a shopping cart, and checkout process. This project will explore more complex state management and routing.
-Status: Planned
-... (add more projects as needed)
+Description: This rolling dice project is a React application that simulates rolling two dice. Users click a button to "roll" the dice, which triggers a visual change and displays random dice faces, enhancing the experience with a rolling animation. The project showcases basic React component structure and state management using hooks.
+
+
 
 Getting Started
 To get started with any of the projects in this repository, follow these steps:
@@ -29,7 +25,7 @@ To get started with any of the projects in this repository, follow these steps:
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/react-projects-practice.git
+git clone https://github.com/vasanthgx/simple-react-projects.git
 
 ```
 2. Navigate to the project directory:
