@@ -1,37 +1,45 @@
-
-.RollDice { 
-	display: flex; 
-	flex-flow: column nowrap; 
-	min-height: 100vh; 
-} 
+.RollDice {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 2em;
+}
 
 /* Shows each dice in one row */
-.RollDice-container { 
-	display: flex; 
-	justify-content: center; 
-	align-content: center; 
-} 
+.RollDice-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
 
-/* Styling rolldice button */
-.RollDice button { 
-	width: 15em; 
-	padding: 1.5em; 
-	border: 0px; 
-	border-radius: 10px; 
-	color: white; 
-	background-color: black; 
-	margin-top: 3em; 
-	align-self: center; 
-} 
+/* Styling RollDice button */
+.RollDice button {
+  width: 15em;
+  padding: 1.5em;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: skyblue;
+  font-size: 1.2em;
+  font-weight: bold;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s;
+  align-self: center;
+}
 
 /* Setting hover effect on button */
-.RollDice button:hover { 
-	cursor: pointer; 
-} 
+.RollDice button:hover {
+  cursor: pointer;
+  background-color: deepskyblue;
+  transform: translateY(-3px);
+}
 
-.RollDice-rolling { 
-	border: 0px; 
-	border-radius: 10px; 
-	background-color: darkslateblue !important; 
-	opacity: 0.7
+/* Styling button when rolling */
+.RollDice-rolling {
+  background-color: deepskyblue !important;
+  opacity: 0.7;
 }
