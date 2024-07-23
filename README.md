@@ -17,6 +17,10 @@ Project 2: [Rolling dice](projects/rolling-dice)
 
 Description: This rolling dice project is a React application that simulates rolling two dice. Users click a button to "roll" the dice, which triggers a visual change and displays random dice faces, enhancing the experience with a rolling animation. The project showcases basic React component structure and state management using hooks.
 
+Project 3: [Accordian](projects/accordion)
+
+ Description :This project is a React-based accordion component that allows users to interact with expandable and collapsible sections. Each section displays a question, and when clicked, it reveals the corresponding answer. The component supports both single and multiple item selection modes. In single selection mode, only one section can be expanded at a time. In multiple selection mode, users can expand multiple sections simultaneously. A button toggles between these modes. The component uses state management to track the currently selected sections and applies conditional rendering to display the content dynamically.
+
 
 
 Getting Started
