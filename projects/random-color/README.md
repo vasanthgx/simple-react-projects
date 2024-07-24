@@ -1,4 +1,6 @@
 
+![alt text](image.png)
+
 # Random Color Generator React Component
 
 This React component generates random colors in either HEX or RGB format. Users can switch between color types and generate new random colors with button clicks.
