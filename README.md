@@ -21,6 +21,11 @@ Project 3: [Accordian](projects/accordion)
 
  Description :This project is a React-based accordion component that allows users to interact with expandable and collapsible sections. Each section displays a question, and when clicked, it reveals the corresponding answer. The component supports both single and multiple item selection modes. In single selection mode, only one section can be expanded at a time. In multiple selection mode, users can expand multiple sections simultaneously. A button toggles between these modes. The component uses state management to track the currently selected sections and applies conditional rendering to display the content dynamically.
 
+Project 4: [Random Color](projects/random-color)
+
+ Description :This React component generates random colors in either HEX or RGB format. Users can switch between color types and generate new random colors with button clicks.
+
+
 
 
 Getting Started
