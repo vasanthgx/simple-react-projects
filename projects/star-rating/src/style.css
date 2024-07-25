@@ -1,6 +1,7 @@
 
 .active{
     color:yellow;
+    cursor: pointer;
 }
 
 .inactive{

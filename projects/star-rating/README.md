@@ -1,7 +1,7 @@
 
 # Star Rating React Component
 
-
+![alt text](image.png)
 
 ## Code Explanation
 
