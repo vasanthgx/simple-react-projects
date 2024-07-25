@@ -25,6 +25,9 @@ Project 4: [Random Color](projects/random-color)
 
  Description :This React component generates random colors in either HEX or RGB format. Users can switch between color types and generate new random colors with button clicks.
 
+ Project 5: [Star Rating](projects/star-rating)
+
+ Description :The StarRating component renders a series of star icons based on the noOfStars prop. Users can click on stars to set the rating, and the component provides visual feedback by highlighting stars as the mouse hovers over them. The styling of the active and inactive stars is defined in the imported style.css file.
 
 
 
