@@ -29,7 +29,19 @@ Project 4: [Random Color](projects/random-color)
 
  Description :The StarRating component renders a series of star icons based on the noOfStars prop. Users can click on stars to set the rating, and the component provides visual feedback by highlighting stars as the mouse hovers over them. The styling of the active and inactive stars is defined in the imported style.css file.
 
+ Project 6: [Image Slider](projects/image-slider)
 
+ Description :
+
+This project involves implementing an image slider component in React without using any third-party libraries. The image slider dynamically fetches image data from an API and displays the images in a carousel format. The project includes features such as:
+
+- **API Integration:** Fetches image data from a provided API URL.
+- **State Management:** Utilizes React's `useState` and `useEffect` hooks for managing image data, loading state, current slide, and error handling.
+- **Navigation Controls:** Includes left and right navigation arrows to cycle through the images.
+- **Indicator Dots:** Displays indicator dots that highlight the current image in the slider.
+- **Responsive Design:** Uses CSS for styling the slider, ensuring it is visually appealing and functional.
+
+The project is designed to be reusable and modular, allowing the parent component to pass different API URLs and limits to customize the image slider's behavior.
 
 Getting Started
 To get started with any of the projects in this repository, follow these steps:
