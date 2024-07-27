@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import './styles.css'
 
 export default function LoadMoreData(){
     const [loading, setLoading] = useState(false);
@@ -43,8 +43,8 @@ export default function LoadMoreData(){
          <div className="image-container">
             {
                 products && products.length ? 
-                products.map(item=>(
-                    <div className="product">
+                products.map((item,index)=>(
+                    <div className="product" key={index}>
                         <img
                             src={item.thumbnail}
                             alt={item.title}
