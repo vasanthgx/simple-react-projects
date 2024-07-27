@@ -43,6 +43,24 @@ This project involves implementing an image slider component in React without us
 
 The project is designed to be reusable and modular, allowing the parent component to pass different API URLs and limits to customize the image slider's behavior.
 
+ Project 7: [Load More Products](projects/load-more-data)
+
+ Description :
+
+This project is a React-based image gallery with a "Load More" feature. Here's a concise description:
+
+"Dynamic Product Gallery with Lazy Loading"
+
+This React application displays a gallery of product images fetched from the DummyJSON API. Key features include:
+
+1. Initial load of 20 product thumbnails with titles
+2. "Load More" button to fetch additional products in batches of 20
+3. Loading state indicator during API calls
+4. Automatic disabling of the "Load More" button after reaching 100 products
+5. Responsive grid layout for displaying product thumbnails
+
+The app demonstrates the use of React hooks (useState, useEffect) for state management and side effects, asynchronous data fetching, and dynamic content rendering. It's designed to efficiently load and display large sets of product data, improving user experience by loading content incrementally.
+
 Getting Started
 To get started with any of the projects in this repository, follow these steps:
 
