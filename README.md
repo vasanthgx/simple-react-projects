@@ -87,3 +87,7 @@ npm install
 npm start
 
 ```
+Project 8: [ Interactive Nested Menu Component](https://github.com/vasanthgx/nested-navigation/tree/master)
+
+Description: This project implements a reusable React component for creating an interactive, nested menu structure. The component allows for the creation of multi-level menus where each menu item can have its own set of child items. Users can dynamically expand or collapse these nested items, providing an intuitive navigation experience.
+
