@@ -1,70 +1,86 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+ ![alt text](image.png)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+**Project Description:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This is a React-based QR Code Generator application. It allows users to input text and generate a corresponding QR code. The application features a simple user interface with an input field, a generate button, and an area to display the generated QR code.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Code Explanation:**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Import statements:**
+   ```javascript
+   import { useState } from 'react';
+   import QRcode from 'react-qr-code';
+   import './styles.css'
+   ```
+   The code imports the necessary dependencies: useState hook from React, QRcode component from 'react-qr-code' library, and a CSS file for styling.
 
-### `npm run eject`
+2. **QrGenerator component:**
+   ```javascript
+   export default function QrGenerator() {
+     // Component logic here
+   }
+   ```
+   This is the main functional component of the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **State management:**
+   ```javascript
+   const [qrCode, setQrCode] = useState('');
+   const [input, setInput] = useState('');
+   ```
+   Two state variables are declared using the useState hook:
+   - `qrCode`: Stores the text to be converted into a QR code.
+   - `input`: Manages the text in the input field.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **handleGenerateQrCode function:**
+   ```javascript
+   function handleGenerateQrCode() {
+     setQrCode(input);
+     setInput('');
+   }
+   ```
+   This function is called when the "Generate QR Code" button is clicked. It updates the `qrCode` state with the current `input` value and clears the input field.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. **Return statement:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   The component returns JSX that defines the structure of the UI.
 
-## Learn More
+6. **Input field:**
+   ```javascript
+   <input 
+     type="text"
+     value={input} 
+     onChange={(e) => setInput(e.target.value)} 
+     placeholder="Enter text" 
+     name='qr-code'
+   />
+   ```
+   This input field is controlled by the `input` state. The onChange event updates the `input` state as the user types.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+7. **Generate button:**
+   ```javascript
+   <button
+     disabled={input && input.trim() === '' ? false : true}
+     onClick={handleGenerateQrCode}
+   >
+     Generate QR Code
+   </button>
+   ```
+   This button triggers the QR code generation. It's disabled when the input is empty or contains only whitespace.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+8. **QR code display:**
+   ```javascript
+   <QRcode id='qr-code-value' value={qrCode} size={400} bgColor='#fff' />
+   
+   ```
+   This renders the QR code using the `react-qr-code` library. The `value` prop is set to the `qrCode` state, which updates when the generate button is clicked.
 
-### Code Splitting
+This project demonstrates the use of React hooks for state management, handling user input, and integrating a third-party library (react-qr-code) to generate QR codes dynamically based on user input.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

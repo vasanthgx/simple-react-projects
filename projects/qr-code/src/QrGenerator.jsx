@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import QRcode from 'react-qr-code';
-import './styles.css'
+
 
 export default function QrGenerator() {
   const [qrCode, setQrCode] = useState('');
@@ -8,6 +8,7 @@ export default function QrGenerator() {
 
   function handleGenerateQrCode() {
     setQrCode(input);
+    setInput('');
   }
 
 
@@ -21,7 +22,14 @@ export default function QrGenerator() {
          placeholder="Enter text" 
          name='qr-code'
          />
+         <button
+         disabled={input && input.trim() === '' ? false : true}
+         onClick={handleGenerateQrCode}
+         >Generate QR Code</button>
 
+      </div>
+      <div>
+        <QRcode id='qr-code-value' value={qrCode} size={400} bgColor='#fff' />
       </div>
       
     </div>
