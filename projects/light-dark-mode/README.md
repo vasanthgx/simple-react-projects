@@ -1,70 +1,93 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Dark Mode
+![alt text](image.png)
 
-## Available Scripts
+## Light Mode
 
-In the project directory, you can run:
+![alt text](image-1.png)
 
-### `npm start`
+### 1. Custom Hook: `useLocalStorage.jsx`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Explanation**:
+This custom React hook manages and synchronizes state with the `localStorage` API. It's useful for persisting data across page reloads or browser sessions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Code Breakdown:
 
-### `npm test`
+```jsx
+import { useEffect, useState } from "react";
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+export default function useLocalStorage(key, initialValue) {
+    const [value, setValue] = useState(()=>{
+        let currentValue;
+        try {
+            // Tries to get the value from localStorage, or if it doesn't exist, sets it to the initialValue
+            currentValue = JSON.parse(
+                localStorage.getItem(key) || String(initialValue)
+            );
+        } catch (error) {
+            console.log(error);
+            currentValue = initialValue;
+        }
+        return currentValue;
+    });
 
-### `npm run build`
+    useEffect(()=>{
+        // Updates the localStorage value whenever 'value' or 'key' changes
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    return [value, setValue];
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Key Concepts:
+- **`useState` with lazy initialization**: The initial state is set using a function (`() => {...}`). This ensures that localStorage access only happens once when the component is first rendered.
+- **Error handling**: A `try-catch` block is used to handle possible errors in `JSON.parse` or `localStorage` retrieval.
+- **`useEffect` hook**: This hook listens for changes to `key` and `value`, ensuring that the new value is stored in `localStorage` whenever the state changes.
+- **Return value**: The hook returns an array, similar to `useState`, consisting of the current value (`value`) and the function to update it (`setValue`).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 2. Component: `LightDarkMode.jsx`
 
-### `npm run eject`
+**Explanation**:
+This component uses the `useLocalStorage` hook to toggle between light and dark themes, and it persists the user's theme choice in `localStorage`.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### Code Breakdown:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```jsx
+import useLocalStorage from "./useLocalStorage";
+import './theme.css';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+export default function LightDarkMode() {
+    const [theme, setTheme] = useLocalStorage('theme', 'dark');
+     
+    function handleToggleMode(){
+        setTheme(theme === "light" ? 'dark' : 'light');
+    }
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+    console.log(theme);
 
-## Learn More
+    return (
+        <div className="light-dark-mode" data-theme={theme}>
+            <div className="container">
+                <p>Hello World !!!</p>
+                <button onClick={handleToggleMode}>Change Mode</button>
+            </div>
+        </div>
+    );
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Key Concepts:
+- **`useLocalStorage`**: This is used to get the current theme (`light` or `dark`) from `localStorage` and set it as the initial state. It also stores changes back to `localStorage`.
+- **`handleToggleMode` function**: This function toggles between light and dark mode by checking the current `theme` value and setting the opposite one.
+- **Dynamic `data-theme` attribute**: The `data-theme={theme}` part assigns the current theme to the root div. This can be used in CSS to apply different styles based on the selected theme.
+  
+#### Functionality:
+- The component renders a `div` that contains a button and a message.
+- When the button is clicked, `handleToggleMode` toggles the theme and updates the `data-theme` attribute, which triggers CSS changes (in `theme.css`).
+- The theme is also saved to `localStorage`, so if the user refreshes the page, the selected theme is preserved. 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Overall Workflow:
+1. **Initial Theme Load**: The `useLocalStorage` hook checks `localStorage` for the previously set theme. If none is found, it defaults to `'dark'`.
+2. **Theme Toggle**: When the button is clicked, the `handleToggleMode` function switches the theme between light and dark.
+3. **Persistence**: The updated theme is saved back to `localStorage`, so the theme preference is remembered across page reloads or browser sessions.

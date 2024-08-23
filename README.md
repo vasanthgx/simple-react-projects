@@ -95,3 +95,7 @@ Description: This project implements a reusable React component for creating an 
  Project 9: [QR Code Generator](projects/qr-code)
 
  Description : This is a React-based QR Code Generator application. It allows users to input text and generate a corresponding QR code. The application features a simple user interface with an input field, a generate button, and an area to display the generated QR code.
+
+ Project 10: [Dark-Light Mode](projects/light-dark-mode)
+
+ Description : This project is a React application that implements a simple light and dark mode toggle feature using a custom hook, `useLocalStorage`. The application stores the user's theme preference (light or dark) in the browser's `localStorage`, allowing the theme to persist across page reloads. The `LightDarkMode` component provides a user interface with a button to toggle between the themes. The selected theme is applied via dynamic CSS, utilizing a `data-theme` attribute, which updates based on the user's choice. This project demonstrates how to integrate local storage and state management for a seamless user experience.
