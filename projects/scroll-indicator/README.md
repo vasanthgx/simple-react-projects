@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+### Project Description: Scroll Indicator with Data Fetching
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React component that integrates a scroll progress bar with data fetching. It tracks the user's scrolling behavior and displays the scroll progress as a visual indicator. Simultaneously, it fetches data from a provided API endpoint and displays the content on the page. The progress bar updates dynamically based on the user's scroll position, while the data loading process is handled in a user-friendly way with error handling and loading states.
 
-## Available Scripts
+### Code Explanation
 
-In the project directory, you can run:
+#### 1. **Imports and State Setup**
+```js
+import { useEffect, useState } from 'react';
+import './scroll.css';
+```
+The component uses the `useState` and `useEffect` hooks from React to manage state and side effects. It also imports a CSS file to style the scroll indicator and progress bar.
 
-### `npm start`
+#### 2. **Component State Variables**
+```js
+const [data, setData] = useState([]);
+const [loading, setLoading] = useState(false);
+const [errorMessage, setErrorMessage] = useState('');
+const [scrollPercentage, setScrollPercentage] = useState(0);
+```
+- `data`: Holds the fetched data.
+- `loading`: Tracks whether the data is currently being fetched.
+- `errorMessage`: Stores any error message if the fetch fails.
+- `scrollPercentage`: Tracks how far down the page the user has scrolled, in percentage terms.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 3. **Asynchronous Data Fetching**
+```js
+async function fetchData(getUrl){
+  try {
+     setLoading(true);
+     const response = await fetch(getUrl);
+     const data = await response.json();
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+     if(data && data.products && data.products.length){
+      setData(data.products);
+      setLoading(false);
+     }
+  } catch (error) {
+    console.log(error);
+    setErrorMessage(error.message);
+  }
+}
+```
+- `fetchData`: Fetches data asynchronously from the `url` prop.
+- If successful, the `data` state is updated with the API response.
+- If there's an error, the `errorMessage` is set.
 
-### `npm test`
+#### 4. **Using `useEffect` to Fetch Data**
+```js
+useEffect(() => {
+  fetchData(url);
+}, [url]);
+```
+- The `useEffect` hook calls the `fetchData` function whenever the `url` prop changes. This makes the component re-fetch data dynamically if a new URL is provided.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### 5. **Scroll Progress Calculation**
+```js
+function handleScrollPercentage(){
+  const scroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  setScrollPercentage((scroll / height) * 100);
+}
+```
+- This function calculates the percentage of the page scrolled by comparing the current scroll position (`scrollTop`) with the total height of the scrollable content (`scrollHeight - clientHeight`).
+- The result is then stored in `scrollPercentage`.
 
-### `npm run build`
+#### 6. **Using `useEffect` to Track Scrolling**
+```js
+useEffect(() => {
+  window.addEventListener('scroll', handleScrollPercentage);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  window.removeEventListener('scroll', ()=>{});
+}, []);
+```
+- Another `useEffect` hook listens for the `scroll` event on the window. Whenever the user scrolls, it updates the scroll percentage by calling `handleScrollPercentage`.
+- `window.removeEventListener` is called to clean up any previous event listeners (though here it's used incorrectly; this can be improved).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 7. **Conditional Rendering Based on State**
+```js
+if (errorMessage) return <h1>Error! {errorMessage}</h1>;
+if (loading) return <h1>Loading... please wait</h1>;
+```
+- If there is an error or the data is still loading, the component will render an appropriate message to the user.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### 8. **Rendering the Scroll Indicator and Data**
+```js
+return (
+  <div>
+    <div className="top-container">
+      <h1>Scroll Indicator</h1>
+      <div className='scroll-progress-container'>
+        <div className="progress-bar" style={{width: `${scrollPercentage}%`}}></div>
+      </div>
+    </div>
+    
+    <div className="data-container">
+      {data && data.length ? data.map((item) => <p>{item.title}</p>) : null}
+    </div>
+  </div>
+);
+```
+- The scroll indicator is displayed as a `progress-bar` whose width is set dynamically according to the `scrollPercentage`.
+- The fetched data (if any) is mapped over and displayed as a list of titles.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Summary
+This component demonstrates a clean way to handle API data fetching alongside dynamic scroll progress tracking. It features error handling, a loading state, and a scroll indicator that enhances the user experience.
