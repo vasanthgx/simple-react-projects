@@ -11,10 +11,12 @@ function ScrollIndicator({url}) {
        setLoading(true);
        const response = await fetch(getUrl);
        const data = await response.json();
-       setData(data);
-       setLoading(false); 
+       
 
-       console.log(data);
+       if(data && data.products && data.products.length){
+        setData(data.products);
+        setLoading(false);
+       }
       
     } catch (error) {
       console.log(error);
@@ -26,9 +28,19 @@ function ScrollIndicator({url}) {
   useEffect(() => {
     fetchData(url);
   }, [url]);
+
+  
+       console.log(data,loading);
   return (
     <div >
-     scroll
+      <h1>Scroll Indicator</h1>
+      <div className="data-container">
+        {
+           data && data.length ? 
+            data.map( (item)=> <p>{item.title}</p>)
+           : null
+        }
+      </div>
     </div>
   );
 }
