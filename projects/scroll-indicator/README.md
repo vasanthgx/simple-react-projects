@@ -2,6 +2,9 @@
 
 This project is a React component that integrates a scroll progress bar with data fetching. It tracks the user's scrolling behavior and displays the scroll progress as a visual indicator. Simultaneously, it fetches data from a provided API endpoint and displays the content on the page. The progress bar updates dynamically based on the user's scroll position, while the data loading process is handled in a user-friendly way with error handling and loading states.
 
+![alt text](image.png)
+
+
 ### Code Explanation
 
 #### 1. **Imports and State Setup**
