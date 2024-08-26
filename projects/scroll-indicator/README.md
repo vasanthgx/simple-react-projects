@@ -4,6 +4,8 @@ This project is a React component that integrates a scroll progress bar with dat
 
 ![alt text](image.png)
 
+-----
+
 
 ### Code Explanation
 
