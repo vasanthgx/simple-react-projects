@@ -52,15 +52,22 @@ function ScrollIndicator({url}) {
 
   
        console.log(data,scrollPercentage);
+       if(errorMessage) return <h1>Erro ! {errorMessage}</h1>
+       if(loading) return <h1>Loading... please wait</h1>
   return (
     <div >
-      <h1>Scroll Indicator</h1>
-      <div className='scroll-progress-container'>
-        <div className="progress-bar">
-          
-        </div>
+     
+      <div className="top-container">
+         <h1>Scroll Indicator</h1>
+          <div className='scroll-progress-container'>
+            <div className="progress-bar" style={{width: `${scrollPercentage}%`}}>
+
+            </div>
+
+          </div>
 
       </div>
+      
       <div className="data-container">
         {
            data && data.length ? 
